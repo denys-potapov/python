@@ -1,11 +1,12 @@
 # AntHive.IO sample bot in *Python*
 
+## [Import](https://github.com/new/import) this sample bot.
+
 ## Requirements
-- Clone https://github.com/anthive/python.git
-- Push to your Github account.
+- Set your username in [ANTHIVE](ANTHIVE) file.
+- Push to your Github account.	- Push to your Github account.
 - Do not push your code to sample bot repo.
-- Signup at https://profile.anthive.io/
-- Set your username in [ANTHIVE](ANTHIVE) file
+- Set your repository in **settings** page https://profile.anthive.io/settings/
 
 ### Python 2
 - In [ANTHIVE](ANTHIVE) file set **lang** to **python2**
@@ -13,7 +14,14 @@
 ### Python 3
 - In [ANTHIVE](ANTHIVE) file set **lang** to **python3**
 
-## Run locally 
+## Debug and Sandbox
+- git push origin master
+- Verify/Compile your latest commit in **settings** page https://profile.anthive.io/settings/
+- Start new game at https://profile.anthive.io/new-game/
+- Replay game step by step
+- View logs
+
+### Run locally (not required)
 ```
 python run.py
 ```
@@ -24,18 +32,14 @@ python3 run.py
 
 It will start localhost server on port :7070 **Do not change port**
 
-
-## Test with sample call
 ```
 curl -X 'POST' -d @payload.json http://localhost:7070
 ```
 
-## Debug and Sandbox
-- git push
-- Go to [Profile](https://profile.anthive.io/)
-- Queue the game
+### [Rules](https://anthive.io/rules/) and [Leaderboard](https://anthive.io/leaderboard/)
 
-## Coming Soon: *Ranked games and ML*
-- Go to [Profile](https://profile.anthive.io/)
-- Enable Career
-- [Leaderboard](https://anthive.io/liaderboard)
+### Coming Soon:
+- Carrera Mode
+- Tournaments
+- AI/ML bots
+

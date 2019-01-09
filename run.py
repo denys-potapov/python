@@ -8,7 +8,7 @@ try:  # For python 3
 except ImportError:  # For python 2
     from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
-ACTIONS = ["move", "eat", "load", "unload"]
+ACTIONS = ["stay", "move", "eat", "load", "unload"]
 DIRECTIONS = ["up", "down", "right", "left"]
 
 
@@ -29,11 +29,13 @@ class Handler(BaseHTTPRequestHandler):
         orders = {}
         for ant in hive['ants']:
             orders[ant] = {
-                "act": ACTIONS[random.randint(0, 3)],
+                "act": ACTIONS[random.randint(0, 4)],
                 "dir": DIRECTIONS[random.randint(0, 3)]
             }
+
+        # json format sample:
+        # {"1":{"act":"load","dir":"down"},"17":{"act":"load","dir":"up"}}
         response = json.dumps(orders)
-        print(response)
 
         try:  # For python 3
             out = bytes(response, "utf8")
@@ -42,8 +44,7 @@ class Handler(BaseHTTPRequestHandler):
 
         self.wfile.write(out)
 
-        # json format sample:
-        # {"1":{"act":"load","dir":"down"},"17":{"act":"load","dir":"up"}}
+        print("Trick:",  hive['tick'], response)
         return
 
 
