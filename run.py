@@ -1,18 +1,13 @@
 #!/usr/bin/env python
-
 import json
-import random
+from game import Game
 
-try:  # For python 3
-    from http.server import BaseHTTPRequestHandler, HTTPServer
-except ImportError:  # For python 2
-    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-
-ACTIONS = ["stay", "move", "eat", "load", "unload"]
-DIRECTIONS = ["up", "down", "right", "left"]
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
 
 class Handler(BaseHTTPRequestHandler):
+    game = Game()
+
     def _set_headers(self):
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
@@ -25,27 +20,13 @@ class Handler(BaseHTTPRequestHandler):
         # Hive object from request payload
         hive = json.loads(payload)
 
-        # Loop through ants and give orders
-        orders = {}
-        for ant in hive['ants']:
-            orders[ant] = {
-                "act": ACTIONS[random.randint(0, 4)],
-                "dir": DIRECTIONS[random.randint(0, 3)]
-            }
+        orders = self.game.do_turn(hive)
 
-        # json format sample:
-        # {"1":{"act":"load","dir":"down"},"17":{"act":"load","dir":"up"}}
         response = json.dumps(orders)
 
-        try:  # For python 3
-            out = bytes(response, "utf8")
-        except TypeError:  # For python 2
-            out = bytes(response)
-
-        self.wfile.write(out)
+        self.wfile.write(bytes(response, "utf8"))
 
         print("Trick:",  hive['tick'], response)
-        return
 
 
 def run():
