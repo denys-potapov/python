@@ -18,7 +18,7 @@ class Handler(BaseHTTPRequestHandler):
         payload = self.rfile.read(int(self.headers['Content-Length']))
 
         # Hive object from request payload
-        hive = json.loads(payload)
+        hive = json.loads(payload.decode('utf-8'))
 
         orders = self.game.do_turn(hive)
 

@@ -157,6 +157,6 @@ class Game():
 
         # stay still
         for ant in self.free_ants:
-             self.order(ant, 'stay', ('left', 1))
+            self.order(ant, 'stay', ('left', 1))
 
         return self.orders
