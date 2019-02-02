@@ -27,3 +27,7 @@ def test_cell():
 def test_unload_dir():
     game = def_game()
     assert game.unload_dir((1, 0)) == 'left'
+
+def test_unload_dir():
+    game = def_game()
+    assert game.load_dirs((1, 1)) == [('left', 5)]

@@ -58,14 +58,26 @@ class Game():
 
         return False
 
+    def load_dirs(self, pos):
+        food = []
+        for dir in DIRECTIONS.keys():
+            cell = self.cell(pos, dir)
+            food.append((dir, cell.get('food', 0)))
+        food = filter(lambda f: f[1] > 0, food)
+        return sorted(food, key = lambda f: f[1])
+
     def do_loaded(self, ant):
         if ant['payload'] == 0:
             return True
         # can unload
         unload_dir = self.unload_dir(ant['pos'])
         if unload_dir:
-            return self.order(ant, [unload_dir], 'unload')
+            self.order(ant, 'unload', [unload_dir])
+            return False
         # can load
+        load_dirs = self.load_dirs(ant['pos'])
+        if load_dirs:
+            return False
 
         return False
 
