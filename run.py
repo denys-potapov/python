@@ -190,7 +190,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def run():
-    server_address = ('0.0.0.0', 7080)
+    server_address = ('0.0.0.0', 7070)
     httpd = HTTPServer(server_address, Handler)
     httpd.serve_forever()
 
