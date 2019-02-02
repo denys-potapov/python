@@ -1,5 +1,4 @@
 import json
-from game import Game
 
 def payload():
     return json.load(open('payload.json'))
