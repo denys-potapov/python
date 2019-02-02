@@ -1,5 +1,10 @@
 # AntHive.IO sample bot in *Python*
 
+## test
+	
+	python3 -m pytest -s
+
+
 ## [Import](https://github.com/new/import) this sample bot.
 
 ## Requirements
