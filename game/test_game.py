@@ -28,11 +28,10 @@ def test_unload_dir():
     game = def_game()
     assert game.unload_dir((1, 0)) == 'left'
 
-def test_unload_dir():
+def test_load_dir():
     game = def_game()
     assert game.load_dirs((1, 1)) == [('left', 5)]
 
-
 def test_move_dirs():
     game = def_game()
-    assert game.move_dirs((1, 1), (0, 0)) == [('right', 1)]
+    assert game.move_dirs((2, 2), (0, 0)) ==  [('left', 2), ('up', 2)] 

@@ -60,7 +60,6 @@ class Game():
                 f = cell.get('food', 0)
                 if (f > 0) and (len(cell) == 1):
                     self.food.append(((x, y), f))
-        print(self.hive_pos)
 
     def unload_dir(self, pos):
         for dir in DIRECTIONS.keys():
@@ -110,12 +109,9 @@ class Game():
             self.order(ant, 'stay', [('left', 1)])
 
     def do_loaded(self, ant):
-        if ant['payload'] == 0:
-            return True
-
         # can unload
         unload_dir = self.unload_dir(ant['pos'])
-        if unload_dir:
+        if unload_dir and (ant['payload'] > 0):
             self.order(ant, 'unload', [(unload_dir, 1)])
             return False
         
@@ -124,6 +120,9 @@ class Game():
         if (len(load_dirs) > 0) and ant['payload'] < 5:
             self.order(ant, 'load', load_dirs)
             return False
+
+        if ant['payload'] == 0:
+            return True
 
         # go home
         self.move_to(ant, self.hive_pos)
