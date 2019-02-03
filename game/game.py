@@ -60,6 +60,7 @@ class Game():
                 f = cell.get('food', 0)
                 if (f > 0) and (len(cell) == 1):
                     self.food.append(((x, y), f))
+        print(self.hive_pos)
 
     def unload_dir(self, pos):
         for dir in DIRECTIONS.keys():
@@ -129,7 +130,8 @@ class Game():
         return False
 
     def do_food(self):
-        self.food.sort(key = lambda f: - self.dist(f[0], self.hive_pos))
+        self.food.sort(key = lambda f: self.dist(f[0], self.hive_pos))
+
         for pos, _ in self.food:
             min_ant = None
             min_d = 1000000
