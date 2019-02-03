@@ -2,7 +2,7 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-from game import Game
+from game.game import Game
 
 
 class Handler(BaseHTTPRequestHandler):

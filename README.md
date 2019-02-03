@@ -2,7 +2,7 @@
 
 ## test
 	
-	python3 -m pytest -s
+	python -m pytest lib/ -s
 
 
 ## [Import](https://github.com/new/import) this sample bot.
