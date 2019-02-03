@@ -85,7 +85,7 @@ class Game():
         dx = target[0] - pos[0]
         dy = target[1] - pos[1]
         if dx != 0:
-            can_dirs.append(('left' if dx > 0 else 'right', abs(dx)))
+            can_dirs.append(('right' if dx > 0 else 'left', abs(dx)))
         if dy != 0:
             can_dirs.append(('down' if dy > 0 else 'up', abs(dy)))
 
