@@ -1,4 +1,5 @@
 import json
+from game import Game
 
 def payload():
     return json.load(open('payload.json'))
@@ -17,7 +18,6 @@ def test_game_load_hive():
 
 def test_game_do_turn():
     game = def_game()
-    print(game.do_turn(payload()))
 
 
 def test_cell():
