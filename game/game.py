@@ -106,7 +106,7 @@ class Game():
         if len(move_dirs) > 0:
             self.order(ant, 'unload', move_dirs)
         else:
-            self.order(ant, 'stay', ('left', 1))
+            self.order(ant, 'stay', [('left', 1)])
 
     def do_loaded(self, ant):
         if ant['payload'] == 0:
@@ -158,6 +158,6 @@ class Game():
 
         # stay still
         for ant in self.free_ants:
-            self.order(ant, 'stay', ('left', 1))
+            self.order(ant, 'stay', [('left', 1)])
 
         return self.orders
