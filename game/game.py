@@ -120,7 +120,7 @@ class Game():
         # can load
         load_dirs = self.load_dirs(ant['pos'])
         if (len(load_dirs) > 0) and ant['payload'] < 5:
-            self.orderpass(ant, 'unload', load_dirs)
+            self.order(ant, 'unload', load_dirs)
             return False
 
         # go home
