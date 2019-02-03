@@ -104,13 +104,14 @@ class Game():
     def move_to(self, ant, target):
         move_dirs = self.move_dirs(ant['pos'], target)
         if len(move_dirs) > 0:
-            self.order(ant, 'unload', move_dirs)
+            self.order(ant, 'move', move_dirs)
         else:
             self.order(ant, 'stay', [('left', 1)])
 
     def do_loaded(self, ant):
         if ant['payload'] == 0:
             return True
+
         # can unload
         unload_dir = self.unload_dir(ant['pos'])
         if unload_dir:
@@ -120,7 +121,7 @@ class Game():
         # can load
         load_dirs = self.load_dirs(ant['pos'])
         if (len(load_dirs) > 0) and ant['payload'] < 5:
-            self.order(ant, 'unload', load_dirs)
+            self.order(ant, 'load', load_dirs)
             return False
 
         # go home
