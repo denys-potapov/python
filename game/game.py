@@ -73,7 +73,9 @@ class Game():
         food = []
         for dir in DIRECTIONS.keys():
             cell = self.cell(pos, dir)
-            food.append((dir, cell.get('food', 0)))
+            # don't load from hive
+            if (not cell.get('hive')):
+                food.append((dir, cell.get('food', 0)))
         food = filter(lambda f: f[1] > 0, food)
         return sorted(food, key = lambda f: f[1])
 
@@ -93,7 +95,7 @@ class Game():
         move_dirs = []
         for (dir, p) in can_dirs:
             cell = self.cell(pos, dir)
-            if ('food' in cell) or ('ant' in cell):
+            if ('food' in cell) or ('ant' in cell) or ('wall' in cell):
                 continue
             if cell.get('hive', self.id) != self.id:
                 continue
