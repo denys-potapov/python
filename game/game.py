@@ -132,7 +132,8 @@ class Game():
 
     def do_food(self):
         self.food.sort(key = lambda f: self.dist(f[0], self.hive_pos))
-        print(food[:5])
+        print(self.food[:5])
+        print(self.map)
         for pos, _ in self.food:
             min_ant = None
             min_d = 1000000

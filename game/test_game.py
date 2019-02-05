@@ -30,6 +30,20 @@ def test_game_do_turn():
     orders = game.do_turn(hive)
     print(orders)
 
+def test_game_do_turn2():
+    hive = {
+        'id': '1',
+        'ants': {'1': {'x': 1, 'y': 0, 'payload': 0}},
+        'map': {
+            'height': 1,
+            'width': 3,
+            'cells': [[{'hive': '1', 'food': 1}, {}, {}, {'food': 3}]]
+        }
+    }
+    game = def_game()
+    orders = game.do_turn(hive)
+    print(orders)
+
 
 def test_cell():
     game = def_game()
