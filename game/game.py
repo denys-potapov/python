@@ -83,13 +83,15 @@ class Game():
         return abs(target[0] - pos[0]) + abs(target[1] - pos[1])
 
     def move_dirs(self, pos, target):
-        can_dirs = []
         dx = target[0] - pos[0]
         dy = target[1] - pos[1]
-        if dx != 0:
-            can_dirs.append(('right' if dx > 0 else 'left', abs(dx)))
-        if dy != 0:
-            can_dirs.append(('down' if dy > 0 else 'up', abs(dy)))
+        # give him a chance to move random
+        can_dirs = [
+            ('up',    abs(dy) * 2 if dy < 0 else 1),
+            ('right', abs(dx) * 2 if dx > 0 else 1),
+            ('down',  abs(dy) * 2 if dy > 0 else 1),
+            ('left',  abs(dx) * 2 if dx < 0 else 1),
+        ]
 
         # only if we can
         move_dirs = []

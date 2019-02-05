@@ -59,4 +59,4 @@ def test_load_dir():
 
 def test_move_dirs():
     game = def_game()
-    assert game.move_dirs((2, 2), (0, 0)) ==  [('left', 2), ('up', 2)] 
+    assert game.move_dirs((2, 2), (0, 0)) ==  [('up', 4), ('left', 4)] 
