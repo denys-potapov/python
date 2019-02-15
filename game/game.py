@@ -134,8 +134,7 @@ class Game():
 
     def do_food(self):
         self.food.sort(key = lambda f: self.dist(f[0], self.hive_pos))
-        print(self.food[:5])
-        print(self.map)
+
         for pos, _ in self.food:
             min_ant = None
             min_d = 1000000
@@ -155,6 +154,7 @@ class Game():
 
     def do_turn(self, hive):
         self.load_hive(hive)
+        print(self.ants)
         self.orders = {}
 
         # loaded ants
@@ -166,5 +166,5 @@ class Game():
         # stay still
         for ant in self.free_ants:
             self.order(ant, 'stay', [('left', 1)])
-
+        print(self.orders) 
         return self.orders
