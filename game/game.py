@@ -82,18 +82,7 @@ class Game():
     def dist(self, pos, target):
         return abs(target[0] - pos[0]) + abs(target[1] - pos[1])
 
-    def move_dirs(self, pos, target):
-        dx = target[0] - pos[0]
-        dy = target[1] - pos[1]
-        # give him a chance to move random
-        can_dirs = [
-            ('up',    abs(dy) * 2 if dy < 0 else 1),
-            ('right', abs(dx) * 2 if dx > 0 else 1),
-            ('down',  abs(dy) * 2 if dy > 0 else 1),
-            ('left',  abs(dx) * 2 if dx < 0 else 1),
-        ]
-
-        # only if we can
+    def filter_free_dirs(self, pos, can_dirs):
         move_dirs = []
         for (dir, p) in can_dirs:
             cell = self.cell(pos, dir)
@@ -105,12 +94,31 @@ class Game():
 
         return move_dirs
 
+    def move_dirs(self, pos, target):
+        can_dirs = []
+        dx = target[0] - pos[0]
+        dy = target[1] - pos[1]
+        if dx != 0:
+            can_dirs.append(('right' if dx > 0 else 'left', abs(dx)))
+        if dy != 0:
+            can_dirs.append(('down' if dy > 0 else 'up', abs(dy)))
+
+        return can_dirs
+
     def move_to(self, ant, target):
-        move_dirs = self.move_dirs(ant['pos'], target)
+        # move to target
+        move_dirs = self.filter_free_dirs(ant['pos'], self.move_dirs(ant['pos'], target))
         if len(move_dirs) > 0:
             self.order(ant, 'move', move_dirs)
-        else:
-            self.order(ant, 'stay', [('left', 1)])
+            return
+
+        # move random
+        any_dirs = self.filter_free_dirs(ant['pos'], [(d, 1) for d in DIRECTIONS.keys()])
+        if len(any_dirs) > 0:
+            self.order(ant, 'move', any_dirs)
+            return
+
+        self.order(ant, 'stay', [('left', 1)])
 
     def do_loaded(self, ant):
         # can unload
@@ -141,6 +149,7 @@ class Game():
             min_i = None
             for i, ant in enumerate(self.free_ants):
                 d = self.dist(pos, ant['pos'])
+
                 if d < min_d:
                     min_ant = ant
                     min_d = d
@@ -148,16 +157,15 @@ class Game():
 
             if min_ant is None:
                 return
-            self.move_to(ant, pos)
+
+            self.move_to(min_ant, pos)
             del(self.free_ants[min_i])
         
 
     def do_turn(self, hive):
         self.load_hive(hive)
-        print('\nHive:')
-        print(hive)
-        print('\nAnts:')
-        print(self.free_ants)
+        print('\nHive:\n', hive)
+        print('\nAnts:\n', self.free_ants)
 
         self.orders = {}
 
@@ -170,6 +178,7 @@ class Game():
         # stay still
         for ant in self.free_ants:
             self.order(ant, 'stay', [('left', 1)])
-        print('\nOrders:')
-        print(self.orders) 
+
+        print('\nOrders:\n', self.orders)
+
         return self.orders
