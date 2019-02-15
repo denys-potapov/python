@@ -154,7 +154,7 @@ class Game():
 
     def do_turn(self, hive):
         self.load_hive(hive)
-        print(self.ants)
+        print(self.free_ants)
         self.orders = {}
 
         # loaded ants
