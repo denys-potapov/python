@@ -154,7 +154,11 @@ class Game():
 
     def do_turn(self, hive):
         self.load_hive(hive)
+        print('\nHive:')
+        print(hive)
+        print('\nAnts:')
         print(self.free_ants)
+
         self.orders = {}
 
         # loaded ants
@@ -166,5 +170,6 @@ class Game():
         # stay still
         for ant in self.free_ants:
             self.order(ant, 'stay', [('left', 1)])
+        print('\nOrders:')
         print(self.orders) 
         return self.orders
