@@ -4,6 +4,9 @@
 	
 	python -m pytest lib/ -s
 
+## logs
+
+	https://storage.googleapis.com/anthive-prod-logs/3.0/DgFDtEY1L0MpTcpeJ9hp.csv
 
 ## [Import](https://github.com/new/import) this sample bot.
 

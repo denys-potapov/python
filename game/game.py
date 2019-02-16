@@ -108,12 +108,14 @@ class Game():
     def move_to(self, ant, target):
         # move to target
         move_dirs = self.filter_free_dirs(ant['pos'], self.move_dirs(ant['pos'], target))
+
         if len(move_dirs) > 0:
             self.order(ant, 'move', move_dirs)
             return
 
         # move random
         any_dirs = self.filter_free_dirs(ant['pos'], [(d, 1) for d in DIRECTIONS.keys()])
+
         if len(any_dirs) > 0:
             self.order(ant, 'move', any_dirs)
             return
@@ -164,8 +166,8 @@ class Game():
 
     def do_turn(self, hive):
         self.load_hive(hive)
-        print('\nHive:\n', hive)
-        print('\nAnts:\n', self.free_ants)
+        # print('\nHive:\n', hive)
+        # print('\nAnts:\n', self.free_ants)
 
         self.orders = {}
 
@@ -179,6 +181,6 @@ class Game():
         for ant in self.free_ants:
             self.order(ant, 'stay', [('left', 1)])
 
-        print('\nOrders:\n', self.orders)
+        # print('\nOrders:\n', self.orders)
 
         return self.orders
